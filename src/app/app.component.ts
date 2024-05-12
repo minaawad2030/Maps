@@ -3,6 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import * as L from 'leaflet';
 import { Observable, Subscriber } from 'rxjs';
+import { ChatService } from './chat.service';
 
 @Component({
   selector: 'app-root',
@@ -14,6 +15,8 @@ import { Observable, Subscriber } from 'rxjs';
 export class AppComponent implements OnInit {
   private trucks: string[] = ['truck1', 'truck2', 'truck3'];
   private map: any;
+  constructor(private chatService:ChatService){}
+
   options = {
     layers: [
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -26,7 +29,9 @@ export class AppComponent implements OnInit {
   };
 
   ngOnInit(): void {
-    this.loadMap();
+   
+    this.loadMap(); 
+    this.chatService.createChatConnection(852);
   }
   title = 'maps-test';
   lat = '24.0941352';
